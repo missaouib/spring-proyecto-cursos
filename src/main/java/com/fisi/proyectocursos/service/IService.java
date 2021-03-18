@@ -4,10 +4,9 @@ import java.util.List;
 
 public interface IService<T> {
 	
-	T registrar(T t);
-	T modificar(T t);
-	void eliminarPorId(int id);
-	List<T> listar();
-	T buscarPorId(int id);
+	T save(T t);
+	void deleteById(int id);
+	List<T> findAll();
+	T findById(int id);
 
 }
