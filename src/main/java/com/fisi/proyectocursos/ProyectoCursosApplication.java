@@ -49,6 +49,7 @@ public class ProyectoCursosApplication implements CommandLineRunner {
 		TrainingCenter tc = new TrainingCenter();
 		tc.setUsername("empresa");
 		tc.setPassword("empresa");
+		tc.setName("empresa");
 		tc.setRoles(new HashSet<>());
 		tc.getRoles().add(role_center);
 		

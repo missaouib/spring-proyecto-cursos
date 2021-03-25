@@ -1,0 +1,1 @@
+let btnEliminar = document.getElementById("btnEliminar");

@@ -37,7 +37,7 @@ public class CourseServiceImpl implements ICourseService {
 	}
 
 	@Override
-	public List<Course> listarPorCentroCapacitacion(TrainingCenter trainingCenter) {
+	public List<Course> findByTrainingCenter(TrainingCenter trainingCenter) {
 		return courseRepository.findByTrainingCenter(trainingCenter);
 	}
 

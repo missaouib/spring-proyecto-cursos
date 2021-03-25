@@ -15,7 +15,7 @@ import com.fisi.proyectocursos.model.Person;
 import com.fisi.proyectocursos.model.Role;
 import com.fisi.proyectocursos.security.service.SecurityService;
 import com.fisi.proyectocursos.service.impl.UserServiceImpl;
-import com.fisi.proyectocursos.validators.UserValidator;
+import com.fisi.proyectocursos.utils.UserValidator;
 
 @Controller
 public class LoginController {

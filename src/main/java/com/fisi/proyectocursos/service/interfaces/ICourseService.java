@@ -8,6 +8,6 @@ import com.fisi.proyectocursos.service.IService;
 
 public interface ICourseService extends IService<Course> {
 	
-	List<Course> listarPorCentroCapacitacion(TrainingCenter trainingCenter);
+	List<Course> findByTrainingCenter(TrainingCenter trainingCenter);
 
 }
