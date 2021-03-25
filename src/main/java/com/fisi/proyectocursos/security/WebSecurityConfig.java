@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -49,8 +50,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/").permitAll() 
 				.antMatchers("/css/**", "/js/**", "/media/**", "/plugins/**", "/registro**", "/recuperacion**").permitAll()
-				.antMatchers("/catalogo").hasRole("CENTER")
-				.antMatchers("/usuario").hasRole("USER")
+				.antMatchers(HttpMethod.GET, "/catalogo/**").hasRole("CENTER")
+				.antMatchers(HttpMethod.POST, "/catalogo/**").hasRole("CENTER")
+				.antMatchers("/usuario/**").hasRole("USER")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()

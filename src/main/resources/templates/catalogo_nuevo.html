@@ -4,7 +4,7 @@
 	<!--begin::Head-->
 	<head>
 		<meta charset="utf-8" />
-		<title>Catálogo | EduFind</title>
+		<title>Crear curso | EduFind</title>
 		<meta name="description" content="HTML sourced datatables examples" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -322,60 +322,61 @@
 								<div class="card card-custom">
 									<div class="card-header">
 										<div class="card-title">
-											<h3 class="card-label">Lista de cursos</h3>
-										</div>
-										<div class="card-toolbar">
-											<!--begin::Button-->
-											<a href="/catalogo/nuevo" class="btn btn-primary font-weight-bolder">
-											<i class="la la-plus"></i>Nuevo curso</a>
-											<!--end::Button-->
+											<h3 class="card-label">Nuevo curso</h3>
 										</div>
 									</div>
 									<div class="card-body">
-										<!--begin: Datatable-->
-										<table class="table table-hover table-checkable" id="kt_datatable" style="margin-top: 13px !important">
-											<thead>
-												<tr>
-													<th>Curso ID</th>
-													<th>Nombre</th>
-													<th>Fecha de inicio</th>
-													<th>Horario</th>
-													<th>Duración</th>
-													<th>Enlace</th>
-													<th>Estado</th>
-													<th>Acción</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr th:each="course: ${courses}">
-													<td th:text="${course.id}">1</td>
-													<td th:text="${course.name}">Java Developer</td>
-													<td th:text="${course.startDate}">04/04/2021</td>
-													<td th:text="${course.schedule}">DOM 09:00 - 13:00</td>
-													<td th:text="${course.duration} + ' horas'">24 horas</td>
-													<td><a href="#" >URL</a></td>
-													<td>                
-                                                        <span th:if="${course.status == 1}"
-                                                        	class="label label-inline label-light-primary font-weight-bold">
-                                                            Activo
-                                                        </span>
-                                                        <span th:if="${course.status == 0}"
-                                                        	class="label label-inline label-light-dark font-weight-bold">
-                                                            Inactivo
-                                                        </span>
-                                                    </td>
-													<td>
-                                                        <div>
-                                                            <a th:href="@{/catalogo/editar/{id}(id=${course.id})}" 
-                                                            	href="#" class="btn btn-warning btn-sm font-weight-bold mr-2">Editar</a>
-                                                            <a data-toggle="modal" data-target="#deleteModal" th:attr="data-id=${course.id}"
-                                                            	href="#" class="btn btn-danger btn-sm font-weight-bold mr-2 deleteCourse">Eliminar</a>
-                                                        </div>
-                                                    </td>
-												</tr>
-											</tbody>
-										</table>
-										<!--end: Datatable-->
+										<!--begin::Form-->
+
+					                    <!--begin::Form-->
+					                    <form th:action="@{/catalogo/nuevo}" th:object="${newCourse}" method="post">
+						                    <div class="modal-body">
+						                        <div class="form-group row">
+						                            <label class="col-2 col-form-label">Nombre</label>
+						                            <div class="col-10">
+						                                <input class="form-control" type="text" placeholder="Docker desde cero" th:field="*{name}" />
+						                            </div>
+						                        </div>
+						
+						                        <div class="form-group row">
+						                            <label for="example-date-input" class="col-2 col-form-label">Fecha de inicio</label>
+						                            <div class="col-10">
+						                                <input class="form-control" type="date" th:field="*{startDate}" />
+						                            </div>
+						                        </div>
+						
+						                        <div class="form-group row">
+						                            <label class="col-2 col-form-label">Horario</label>
+						                            <div class="col-10">
+						                                <input class="form-control" type="text" placeholder="LUN 08:00 - 12:00, MAR 08:00 - 12:00" th:field="*{schedule}" />
+						                            </div>
+						                        </div>
+						
+						                        <div class="form-group row">
+						                            <label for="example-number-input" class="col-2 col-form-label">Duración</label>
+						                            <div class="col-10 input-group">
+						                                <input type="number" class="form-control" placeholder="24" th:field="*{duration}" />
+						                                <div class="input-group-append"><span class="input-group-text">horas</span></div>
+						                            </div>
+						                        </div>
+						
+						                        <div class="form-group row">
+						                            <label for="example-url-input" class="col-2 col-form-label">Enlace</label>
+						                            <div class="col-10">
+						                                <input class="form-control" type="url" placeholder="https://getbootstrap.com" th:field="*{url}" />
+						                            </div>
+						                        </div>
+						
+						                    </div>
+						                    
+						  
+						
+						                    <div class="modal-footer">
+						                        <button type="submit" class="btn btn-light-success font-weight-bold">Crear</button>
+						                        <a href="/catalogo" class="btn btn-primary font-weight-bold">Cancelar</a>
+						                    </div>
+					                    </form>
+
 									</div>
 								</div>
 								<!--end::Card-->
@@ -429,27 +430,6 @@
 		</div>
 		<!--end::Scrolltop-->
 
-        <!-- Modal-->
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Eliminar curso</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <i aria-hidden="true" class="ki ki-close"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="font-size-lg">¿Está seguro de que desea eliminar el curso?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a type="button" class="btn btn-light-success font-weight-bold" id="btnDeleteCourse">Eliminar</a>
-                        <a type="button" class="btn btn-primary font-weight-bold" data-dismiss="modal">Cancelar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
 		<script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
 		<!--begin::Global Config(global config for global JS scripts)-->
@@ -460,27 +440,7 @@
 		<script src="/plugins/custom/prismjs/prismjs.bundle.js"></script>
 		<script src="/js/scripts.bundle.js"></script>
 		<!--end::Global Theme Bundle-->
-		<!--begin::Page Vendors(used by this page)-->
-		<script src="/plugins/custom/datatables/datatables.bundle.js"></script>
-		<!--end::Page Vendors-->
-		<!--begin::Page Scripts(used by this page)-->
-		<script src="/js/pages/crud/datatables/data-sources/html.js"></script>
 		<!--end::Page Scripts-->
-		
-		<!-- Custom script -->
-		
-		<script>
-			$('.deleteCourse').click(function () {
-				var cursoId = $(this).attr('data-id');
-				$('#btnDeleteCourse').attr('href', '/catalogo/eliminar/' + cursoId);
-			});
-			
-			$('.editCourse').click(function () {
-				
-			})
-			
-			
-		</script>
 	</body>
 	<!--end::Body-->
 </html>

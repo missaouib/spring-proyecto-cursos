@@ -42,7 +42,7 @@ public class Course {
 	private Integer status = 1;
 
 	@ManyToOne
-	@JoinColumn(name = "category_id", nullable = false)
+	@JoinColumn(name = "category_id", nullable = true)
 	private Category category;
 
 	@ManyToOne
